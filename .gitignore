@@ -8,4 +8,4 @@ dist
 *.iml
 
 ## secret oauth stuff for twitch:
-./bot/secret.js
+/bot/secret.js

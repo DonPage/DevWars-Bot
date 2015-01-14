@@ -28,9 +28,26 @@ Once you have that you can run this command:
 ```sh
 $ sudo npm install
 ```
-*Note: If you get an ERR, make sure you have the latest version of npm*
+*Note: If you get an ERR, make sure you have the latest version of npm. If you are having problems you can view the install file in the docs folder.*
 
-If you are having problems you can view the install file in the docs folder.
+#### next, getting the twitch bot to work:
+- Create/Login to your twitch bot account and get your IRC password from here: [http://twitchapps.com/tmi/](http://twitchapps.com/tmi/)
+- Open: `bot/secret.js` - and fill out the information
+
+```
+var bot = twitchbot.create({
+  name: 'MyBotName',
+  channel: 'my twitch username',
+  password: 'my bot irc password'
+});
+```
+
+Once that information is filled out, now you can run the bot: *make sure you are in the bot folder*
+
+```
+$ node bot
+```
+
 
 ### How to Contribute
 I will list what you need to know and what files are okay to edit when trying to contribute to different aspects of the project:
