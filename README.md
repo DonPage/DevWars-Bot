@@ -56,10 +56,10 @@ app/scripts/app.js
 ---
 
 #### Back-end
-- `NodeJS` - *Basic understanding of JavaScript is needed to edit.*
+- `NodeJS` - *Anyone that understands Javascript can edit.*
 - `Firebase` - *Intermediate understanding is required.*
 ```
-bot.js
+bot/bot.js
 ```
 
 
