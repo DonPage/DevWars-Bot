@@ -13,7 +13,7 @@ There are two parts to this project:
 
 ## Dev Notes
 
-Made by: Don Page - DivineDon (twitch)
+Made by: Don Page - divine_don (twitch)
 I've used Bootstrap and Foundation before but wanted to try something new, [Web Starter Kit by Google](https://developers.google.com/web/starter-kit/).
 
 ### How to Install:
