@@ -4,7 +4,7 @@
 
  Two teams of three battle to produce the best work of their coding ability, taking the reigns of a single programming language each: HTML, CSS and JavaScript.
 
-## What is this repo do?
+## What is this repo?
 
 There are two parts to this project:
 
