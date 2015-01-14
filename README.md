@@ -14,7 +14,7 @@ There are two parts to this project:
 ## Dev Notes
 
 Made by: Don Page - DivineDon (twitch)
-I've used Bootstrap and Foundation before but wanted to try something new, [Web Starter Kit by Google](https://developers.google.com/web/starter-kit/)
+I've used Bootstrap and Foundation before but wanted to try something new, [Web Starter Kit by Google](https://developers.google.com/web/starter-kit/).
 
 ### How to Install:
 
@@ -33,11 +33,11 @@ $ sudo npm install
 If you are having problems you can view the install file in the docs folder.
 
 ### How to Contribute
-I will list what you need to know and what files are okay to edit when trying to contribute to different aspects of the project
+I will list what you need to know and what files are okay to edit when trying to contribute to different aspects of the project:
 
 #### Design: 
 - `Sass` - *Make sure to have a good understanding of scss. If you want to create different .scss files inside the styles folder is okay, just make sure you @import then into main.*
-- `HTML` - *Basic understanding is required*
+- `HTML` - *Basic understanding is required.*
 ```
 app/styles/main.scss
 app/views/*.html
@@ -46,9 +46,9 @@ app/views/*.html
 ---
 
 #### Front-end
-- `Angular` - *Angular is the MVC framework chosen for this project. Intermediate understanding of how it works is needed to make changes*
-- `AngularFire` - *Make sure you are up to date with the recent changes from 0.7.0 to 0.9.0*
-- `jQuery` - *Basic understanding is required*
+- `Angular` - *Angular is the MVC framework chosen for this project. Intermediate understanding of how it works is needed to make changes.*
+- `AngularFire` - *Make sure you are up to date with the recent changes from 0.7.0 to 0.9.0. [changelog](https://www.firebase.com/docs/web/libraries/angular/changelog.html).*
+- `jQuery` - *Basic understanding is required.*
 ```
 app/scripts/app.js
 ```
@@ -56,8 +56,8 @@ app/scripts/app.js
 ---
 
 #### Back-end
-- `NodeJS` - *Basic understanding of JavaScript is needed to edit*
-- `Firebase` - *Intermediate understanding is required*
+- `NodeJS` - *Basic understanding of JavaScript is needed to edit.*
+- `Firebase` - *Intermediate understanding is required.*
 ```
 bot.js
 ```
