@@ -32,17 +32,19 @@ $ sudo npm install
 
 #### next, getting the twitch bot to work:
 - Create/Login to your twitch bot account and get your IRC password from here: [http://twitchapps.com/tmi/](http://twitchapps.com/tmi/)
-- Open: `bot/secret.js` - and fill out the information
+- Create: `bot/secret.js` - and copy the code below:
 
 ```
+var twitchbot = require('./twitchbot.js');
 var bot = twitchbot.create({
-  name: 'MyBotName',
-  channel: 'my twitch username',
-  password: 'my bot irc password'
+  name: 'XXXX',
+  channel: 'XXXX',
+  password: 'oauth:XXXX'
 });
+module.exports = bot;
 ```
 
-Once that information is filled out, now you can run the bot: *make sure you are in the bot folder*
+Once XXXXX information is filled out, now you can run the bot: *make sure you are in the bot folder*
 
 ```
 $ node bot
