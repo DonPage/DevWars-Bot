@@ -6,3 +6,6 @@ dist
 ## Directory-based project format:
 .idea/
 *.iml
+
+## secret oauth stuff for twitch:
+bot/secret.js
