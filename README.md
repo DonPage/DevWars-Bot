@@ -32,7 +32,7 @@ $ sudo npm install
 
 #### next, getting the twitch bot to work:
 - Create/Login to your twitch bot account and get your IRC password from here: [http://twitchapps.com/tmi/](http://twitchapps.com/tmi/)
-- Create: `bot/secret.js` - and copy the code below:
+- Create: `bot/secret.js` - and copy and paste the code below:
 
 ```
 var twitchbot = require('./twitchbot.js');
@@ -55,7 +55,7 @@ $ node bot
 I will list what you need to know and what files are okay to edit when trying to contribute to different aspects of the project:
 
 #### Design: 
-- `Sass` - *Make sure to have a good understanding of scss. If you want to create different .scss files inside the styles folder is okay, just make sure you @import then into main.*
+- `Sass` - *Make sure to have a good understanding of scss. Creating different .scss files inside the styles folder is okay, just make sure you @import then into main.*
 - `HTML` - *Basic understanding is required.*
 ```
 app/styles/main.scss
