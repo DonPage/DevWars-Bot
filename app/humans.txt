@@ -1,0 +1,10 @@
+
+
+# TEAM
+
+  Don Page - Front & Backend Engineer - @DonRPage
+
+
+# TECHNOLOGY
+
+  HTML5, CSS3, Angular, Firebase, AngularFire, NodeJS
