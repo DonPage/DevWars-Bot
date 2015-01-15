@@ -37,8 +37,6 @@ blueTeam.on("child_changed", function (childSnapshot, prevChildName) {
 });//listening for changes in blue and red team--------------------------
 
 
-
-
 bot.addCommand(
   '@join', function (i) { //Format: !join {position} {c9 name}
 
@@ -173,14 +171,19 @@ bot.addCommand(
     var teamColor = i.args[0];
     var pos = i.args[1];
 
-    if (teamColor == "blue") {
-      blueTeam.child(pos).set("");
-      return bot.say("player was kicked from blue team (" + pos + ")");
-    }
+    if (pos == 'js' || pos == 'html' || pos == 'css') {
+      if (teamColor == "blue") {
+        blueTeam.child(pos).set("");
+        return bot.say("player was kicked from blue team (" + pos + ")");
+      }
 
-    if (teamColor == "red") {
-      redTeam.child(pos).set("");
-      return bot.say("player was kicked from red team (" + pos + ")");
+      if (teamColor == "red") {
+        redTeam.child(pos).set("");
+        return bot.say("player was kicked from red team (" + pos + ")");
+      }
+
+    } else {
+      return bot.say(i.from + " wrong format.");
     }
 
   }
