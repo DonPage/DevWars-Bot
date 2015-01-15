@@ -6,9 +6,6 @@
 angular.module('devwars', ['ngRoute', 'firebase', 'angularMoment'])
 
 
-  .constant('FIREBASE_URI', 'https://devwars.firebaseio.com/')//this is where the database is.
-
-
   .run(function (amMoment) {
     amMoment.changeLocale('de');
   })
@@ -35,6 +32,14 @@ angular.module('devwars', ['ngRoute', 'firebase', 'angularMoment'])
     $scope.testing = 'got test'
   })
 
-  .controller("playController", function($scope){
+  .controller("playController", function($scope, $firebase){
+
+    var ref = new Firebase("https://devwars.firebaseio.com/");
+    var fb = $firebase(ref);
+
+    var syncObj = fb.$asObject();
+    syncObj.$bindTo($scope, "room");
+
+
 
   });

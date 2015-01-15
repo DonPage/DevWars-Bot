@@ -17,24 +17,24 @@ var bot = require('./secret.js');
 
 var currentPlayers = []; //list of all players that have a position.
 
-blueTeam.on("child_changed", function (childSnapshot, prevChildName) {
-  console.log("blue changed:", childSnapshot.val().twitch, prevChildName);
-  var player = childSnapshot.val().twitch;
-
-  console.log(currentPlayers.indexOf(player));
-  if (currentPlayers.indexOf(player) == -1) {
-    console.log("adding player to array.");
-    currentPlayers.push(player);
-  }
-
-  if (currentPlayers.indexOf(undefined) != -1) {
-    currentPlayers.splice(currentPlayers.indexOf(undefined), 1)
-  }
-
-  return console.log("currentPlayers:", currentPlayers);
-
-
-});//listening for changes in blue and red team--------------------------
+//blueTeam.on("child_changed", function (childSnapshot, prevChildName) {
+//  console.log("blue changed:", childSnapshot.val().twitch, prevChildName);
+//  var player = childSnapshot.val().twitch;
+//
+//  console.log(currentPlayers.indexOf(player));
+//  if (currentPlayers.indexOf(player) == -1) {
+//    console.log("adding player to array.");
+//    currentPlayers.push(player);
+//  }
+//
+//  if (currentPlayers.indexOf(undefined) != -1) {
+//    currentPlayers.splice(currentPlayers.indexOf(undefined), 1)
+//  }
+//
+//  return console.log("currentPlayers:", currentPlayers);
+//
+//
+//});//listening for changes in blue and red team--------------------------
 
 
 bot.addCommand(
