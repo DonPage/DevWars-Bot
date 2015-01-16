@@ -11,9 +11,6 @@ var waiting = ref.child("waitingRoom");
 var bot = require('./secret.js');
 
 
-//listens for changes and adds new players to list.
-//TODO: this is unfinished.
-
 var currentPlayers = []; //list of all players that have a position.
 
 function addCurrentPlayer(twitch) {
