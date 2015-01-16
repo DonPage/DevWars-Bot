@@ -29,7 +29,7 @@ angular.module('devwars', ['ngRoute', 'firebase', 'angularMoment'])
   })
 
   .controller("homeController", function($scope){
-    $scope.testing = 'got test'
+
   })
 
   .controller("playController", function($scope, $firebase){

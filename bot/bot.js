@@ -17,24 +17,19 @@ var bot = require('./secret.js');
 
 var currentPlayers = []; //list of all players that have a position.
 
-//blueTeam.on("child_changed", function (childSnapshot, prevChildName) {
-//  console.log("blue changed:", childSnapshot.val().twitch, prevChildName);
-//  var player = childSnapshot.val().twitch;
-//
-//  console.log(currentPlayers.indexOf(player));
-//  if (currentPlayers.indexOf(player) == -1) {
-//    console.log("adding player to array.");
-//    currentPlayers.push(player);
-//  }
-//
-//  if (currentPlayers.indexOf(undefined) != -1) {
-//    currentPlayers.splice(currentPlayers.indexOf(undefined), 1)
-//  }
-//
-//  return console.log("currentPlayers:", currentPlayers);
-//
-//
-//});//listening for changes in blue and red team--------------------------
+function addCurrentPlayer(twitch) {
+  if (currentPlayers.indexOf(twitch) === -1) {//not in array
+    currentPlayers.push(twitch);
+  }
+  return console.log(currentPlayers);
+}
+
+function removeCurrentPlayer(twitch) {
+  if (currentPlayers.indexOf(twitch) > -1) {//is in array
+    currentPlayers.splice(currentPlayers.indexOf(twitch), 1);
+  }
+  return console.log(currentPlayers);
+}
 
 
 bot.addCommand(
@@ -51,6 +46,10 @@ bot.addCommand(
 
       //failsafe for c9 username. TODO: maybe use c9 api to confirm usernames??? not sure if possible.
       if (c9 == undefined || c9.length < 2) return bot.say(user + ' Wrong Format. {c9}');
+
+      //failsafe if the user already has a spot.
+      if (currentPlayers.indexOf(user) > -1) return bot.say(user + " you already have a spot.");
+
       enterLobby(user, pos, c9);
     } else {
       return bot.say(user + ' Wrong Format. {pos}');
@@ -99,6 +98,8 @@ function enterLobby(twitch, pos, c9) { //this function just views current positi
 }
 
 function addPlayer(twitch, pos, c9, team) {//this actually adds player into position
+
+  addCurrentPlayer(twitch);
 
   if (team === "blue") {
     blueTeam.child(pos).update({
@@ -172,19 +173,57 @@ bot.addCommand(
     var pos = i.args[1];
 
     if (pos == 'js' || pos == 'html' || pos == 'css') {
+
       if (teamColor == "blue") {
-        blueTeam.child(pos).set("");
-        return bot.say("player was kicked from blue team (" + pos + ")");
-      }
+
+        blueTeam.child(pos).child("twitch").once("value", function (dataSnapshot) {
+          console.log("twitch name to remove:", dataSnapshot.val());
+
+          //if position is already empty.
+          if (dataSnapshot.val() === null) return bot.say(i.from + ", Nobody in that position.");
+
+          removeCurrentPlayer(dataSnapshot.val());
+
+          blueTeam.child(pos).set("");
+
+          return bot.say("player was kicked from blue team (" + pos + ")");
+
+        }, function (err) {
+          return bot.say("something went wrong while kicking.");
+        });
+
+      }//kicking player from blue team.
 
       if (teamColor == "red") {
-        redTeam.child(pos).set("");
-        return bot.say("player was kicked from red team (" + pos + ")");
-      }
+
+        redTeam.child(pos).child("twitch").once("value", function (dataSnapshot) {
+          console.log("twitch name to remove:", dataSnapshot.val());
+
+          //if position is already empty.
+          if (dataSnapshot.val() === null) return bot.say(i.from + ", Nobody in that position.");
+
+          removeCurrentPlayer(dataSnapshot.val());
+
+          redTeam.child(pos).set("");
+
+          return bot.say("player was kicked from red team (" + pos + ")");
+
+        }, function (err) {
+          return bot.say("something went wrong while kicking.");
+        });
+      }//kicking player from red team
 
     } else {
+      //currentPlayers.splice(currentPlayers.indexOf(i.from), 1);
       return bot.say(i.from + " wrong format.");
     }
 
   }
 );//!kick
+
+
+bot.addCommand(
+  '@current', function (i) {
+    console.log("current: ", currentPlayers);
+  }
+);
