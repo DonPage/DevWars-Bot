@@ -9,3 +9,6 @@ dist
 
 ## secret oauth stuff for twitch:
 /bot/secret.js
+
+## secret for firebase
+/bot/fbsecret.js

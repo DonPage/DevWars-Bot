@@ -44,8 +44,21 @@ var bot = twitchbot.create({
 module.exports = bot;
 ```
 
-Once XXXXX information is filled out, now you can run the bot: *make sure you are in the bot folder*
+- Create: `bot/fbsecret.js` - and copy and paste the code below:
+```
+var Firebase = require("firebase");
+var ref = new Firebase("https://XXXXXXX.firebaseio.com/");
+ref.authWithCustomToken("XXXXAUTH_TOKENXXXX", function(error, authData){
+  if(error){
+    console.log("Firebase login Failed!", error);
+  } else {
+    console.log("Authenticated successfully with payload:", authData);
+  }
+});
+module.exports = ref;
+```
 
+Once XXXXX information is filled out, now you can run the bot: *make sure you are in the bot folder*
 ```
 $ node bot
 ```

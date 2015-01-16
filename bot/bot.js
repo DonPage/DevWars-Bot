@@ -1,9 +1,8 @@
 /**
  * Created by donpage on 1/14/15.
  */
-
 var Firebase = require("firebase");
-var ref = new Firebase("https://devwars.firebaseio.com/");
+var ref = require("./fbsecret.js");
 
 var blueTeam = ref.child("blue");
 var redTeam = ref.child("red");
