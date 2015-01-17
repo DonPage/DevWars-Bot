@@ -2,13 +2,13 @@
 
 ## What is DevWars?
 
- Two teams of three battle to produce the best work of their coding ability, taking the reigns of a single programming language each: HTML, CSS and JavaScript.
+ Two teams of three battle to produce the best work of their coding ability, taking the reigns of a single language each: HTML, CSS and JavaScript.
 
 ## What is this repo?
 
 There are two parts to this project:
 
-- `bot` - Allows people to join a programming language position through twitch chat. Example: !join js donpage. This will put you on a blue or red team Javascript position. The {donpage} is your c9 account name.
+- `bot` - Allows people to join a language position through twitch chat. Example: !join js donpage. This will put you on a blue or red team Javascript position. The {donpage} is your c9 account name.
 - `app` - Using Web Starter Kit, Angular, and Firebase, this project main focus is performance and 3-way-binding between front-end and servers. Allowing the user to see open positions without a page reload while also available on mobile browsers.
 
 ## Dev Notes
