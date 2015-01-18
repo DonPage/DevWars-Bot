@@ -6,11 +6,12 @@ var ref = require("./fbsecret.js");
 
 var blueTeam = ref.child("blue");
 var redTeam = ref.child("red");
+var hScores = ref.child("score");
 var waiting = ref.child("waitingRoom");
 
 var bot = require('./secret.js');
 
-
+var waitingList = []; //TODO: actually code a waiting list...
 var currentPlayers = []; //list of all players that have a position.
 
 function addCurrentPlayer(twitch) {
@@ -215,11 +216,66 @@ bot.addCommand(
     }
 
   }
-);//!kick
+);//!kick/END
 
 
 bot.addCommand(
-  '@current', function (i) {
-    console.log("current: ", currentPlayers);
+  '@winner', function (i) { //this handles what team won and people each team-member on said team.
+                            //FORMAT: !winner {teamColor}
+    var teamColor = i.args[0];
+    var allPositions = ["js", "css", "html"];
+
+    for (var j = 0; j < allPositions.length; j++) {
+
+      ref.child(teamColor).child(allPositions[j]).child("twitch").once("value", function(snap){
+
+        var user = snap.val();
+
+        if (user === null) return; //failsafe for if one of the spots empty.
+
+        console.log("!winner", user);
+
+        hScores.child(user).once("value", function(currentData){
+          console.log(user, "currentData:", currentData.val());
+          if (currentData.val() === null){
+            return setUserScore(user);
+          }
+
+          return updateUserScore(user);
+
+        });
+
+      })
+
+    }
+
+
   }
-);
+);//!winner/END
+
+function setUserScore(user){//adds new user to database.
+  console.log("setUserScore:", user);
+  hScores.child(user).set({ gamesPlayed: 1, points: 3, lastPlayed: Firebase.ServerValue.TIMESTAMP })
+}
+
+function updateUserScore(user){//adds user score to already existing data
+  console.log("updateUserScore:", user);
+
+  //This .update NEEDS to go before .transaction, idk why.
+  hScores.child(user).update({
+    lastPlayed: Firebase.ServerValue.TIMESTAMP
+  });
+
+  hScores.child(user).child("gamesPlayed").transaction(function (currentData) {
+    console.log("currentData:", currentData);
+    return currentData+1;
+  });
+
+  hScores.child(user).child("points").transaction(function (currentData) {
+    console.log("currentData:", currentData);
+    return currentData+3;
+  });
+
+}
+
+
