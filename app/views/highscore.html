@@ -1,0 +1,12 @@
+<h1>High Scores</h1>
+
+
+<div class="hs-wrapper">
+  <ul>
+    <li ng-repeat="player in hs | orderBy: player.points">
+      <span class="color--highlight">{{ player.twitch }}</span>
+      <span>{{ player.points }}</span>
+      <span class="color--gray">last played <span am-time-ago="player.lastPlayed"></span></span>
+    </li>
+  </ul>
+</div>

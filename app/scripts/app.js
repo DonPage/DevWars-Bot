@@ -23,22 +23,42 @@ angular.module('devwars', ['ngRoute', 'firebase', 'angularMoment'])
         templateUrl: "views/play.html"
       })
 
+      .when("/highscore", {
+        controller: "hsController",
+        templateUrl: "views/highscore.html"
+      })
+
       .otherwise({
         redirectTo: "/"
       })
   })
 
-  .controller("homeController", function($scope){
+  .controller("homeController", function ($scope) {
 
   })
 
-  .controller("playController", function($scope, $firebase){
+  .controller("playController", function ($scope, $firebase) {
 
     var ref = new Firebase("https://devwars.firebaseio.com/");
     var fb = $firebase(ref);
 
     var syncObj = fb.$asObject();
     syncObj.$bindTo($scope, "room");
+
+
+  })
+
+  .controller("hsController", function($scope, $firebase){
+
+    var hsRef = new Firebase("https://devwars.firebaseio.com/score");
+    var fb = $firebase(hsRef);
+
+    var hsArray = fb.$asArray();
+
+    console.log("hsObj:", hsArray);
+
+    $scope.hs = hsArray;
+
 
 
 
