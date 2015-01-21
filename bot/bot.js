@@ -221,13 +221,13 @@ bot.addCommand(
 
 bot.addCommand(
   '@winner', function (i) { //this handles what team won and people each team-member on said team.
-                            //FORMAT: !winner {teamColor}
+    //FORMAT: !winner {teamColor}
     var teamColor = i.args[0];
     var allPositions = ["js", "css", "html"];
 
     for (var j = 0; j < allPositions.length; j++) {
 
-      ref.child(teamColor).child(allPositions[j]).child("twitch").once("value", function(snap){
+      ref.child(teamColor).child(allPositions[j]).child("twitch").once("value", function (snap) {
 
         var user = snap.val();
 
@@ -235,9 +235,9 @@ bot.addCommand(
 
         console.log("!winner", user);
 
-        hScores.child(user).once("value", function(currentData){
+        hScores.child(user).once("value", function (currentData) {
           console.log(user, "currentData:", currentData.val());
-          if (currentData.val() === null){
+          if (currentData.val() === null) {
             return setUserScore(user);
           }
 
@@ -249,16 +249,35 @@ bot.addCommand(
 
     }
 
+    ref.update({
+      blue: {
+        js: "",
+        html: "",
+        css: ""
+      },
+
+      red: {
+        js: "",
+        html: "",
+        css: ""
+      },
+
+      waitingRoom: ""
+    });
+
+    currentPlayers = [];
+    return bot.say("Congrats " + teamColor + " team!")
+
 
   }
 );//!winner/END
 
-function setUserScore(user){//adds new user to database.
+function setUserScore(user) {//adds new user to database.
   console.log("setUserScore:", user);
-  hScores.child(user).set({ gamesPlayed: 1, points: 3, lastPlayed: Firebase.ServerValue.TIMESTAMP })
+  hScores.child(user).set({gamesPlayed: 1, points: 3, lastPlayed: Firebase.ServerValue.TIMESTAMP})
 }
 
-function updateUserScore(user){//adds user score to already existing data
+function updateUserScore(user) {//adds user score to already existing data
   console.log("updateUserScore:", user);
 
   //This .update NEEDS to go before .transaction, idk why.
@@ -268,12 +287,12 @@ function updateUserScore(user){//adds user score to already existing data
 
   hScores.child(user).child("gamesPlayed").transaction(function (currentData) {
     console.log("currentData:", currentData);
-    return currentData+1;
+    return currentData + 1;
   });
 
   hScores.child(user).child("points").transaction(function (currentData) {
     console.log("currentData:", currentData);
-    return currentData+3;
+    return currentData + 3;
   });
 
 }
