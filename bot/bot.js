@@ -13,12 +13,13 @@ var bot = require('./secret.js');
 
 var waitingList = []; //TODO: actually code a waiting list...
 var currentPlayers = []; //list of all players that have a position.
+reloadCurrentPlayers();
 
 function addCurrentPlayer(twitch) {
   if (currentPlayers.indexOf(twitch) === -1) {//not in array
     currentPlayers.push(twitch);
   }
-  return console.log(currentPlayers);
+  return console.log("currentPlayers: ",currentPlayers);
 }
 
 function removeCurrentPlayer(twitch) {
@@ -295,6 +296,40 @@ function updateUserScore(user) {//adds user score to already existing data
     return currentData + 3;
   });
 
+}
+
+
+//since the currentPlayers is handle locally and not firebase, if the script crashes everyone in currentPlayers will be kicked.
+//This command function runs everytime the bot is started.
+
+bot.addCommand(//manual command.
+  '@reloadPlayers', function () {
+    reloadCurrentPlayers();
+  }
+);//!reloadPlayers/END
+
+function reloadCurrentPlayers() {
+  var allPositions = ["js", "css", "html"];
+
+  for (var i = 0; i < allPositions.length; i++) {
+    var pos = allPositions[i];
+
+    blueTeam.child(pos).child("twitch").once("value", function (snapshot) {
+      //console.log(snapshot.val());
+      if (snapshot.val() != null) {
+        console.log("adding:", snapshot.val());
+        addCurrentPlayer(snapshot.val())
+      }
+    });
+
+    redTeam.child(pos).child("twitch").once("value", function (snapshot) {
+      //console.log(snapshot.val());
+      if (snapshot.val() != null) {
+        console.log("adding:", snapshot.val());
+        addCurrentPlayer(snapshot.val())
+      }
+    });
+  }
 }
 
 
