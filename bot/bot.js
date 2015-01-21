@@ -302,7 +302,7 @@ function updateUserScore(user) {//adds user score to already existing data
 //since the currentPlayers is handle locally and not firebase, if the script crashes everyone in currentPlayers will be kicked.
 //This command function runs everytime the bot is started.
 
-bot.addCommand(//manual command.
+bot.addCommand(//manual command. NOTE: this is already ran on bot load.
   '@reloadPlayers', function () {
     reloadCurrentPlayers();
   }
