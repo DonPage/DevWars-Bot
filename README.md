@@ -1,5 +1,7 @@
 # DevWars Twitch Bot & Interface
 
+<img src="http://donpage.github.io/videos/devwars.gif"/>
+
 ## What is DevWars?
 
  Two teams of three battle to produce the best work of their coding ability, taking the reigns of a single language each: HTML, CSS and JavaScript.
